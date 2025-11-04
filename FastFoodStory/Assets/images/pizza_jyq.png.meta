@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e3b187d921178dc4a8dedca9bc0f2669
+guid: 8be4c4559546087479c6f4e8a44fd0bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8197995813729694574
-    second: vendedor_0
+      213: 5707954043300570611
+    second: pizza_jyq_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vendedor_0
+      name: pizza_jyq_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1152
-        height: 648
+        x: 57
+        y: 72
+        width: 256
+        height: 269
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 29c80840e3eda3e80800000000000000
-      internalID: -8197995813729694574
+      spriteID: 3f56f29d5f9b63f40800000000000000
+      internalID: 5707954043300570611
       vertices: []
       indices: 
       edges: []
@@ -174,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vendedor_0: -8197995813729694574
+      pizza_jyq_0: 5707954043300570611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
