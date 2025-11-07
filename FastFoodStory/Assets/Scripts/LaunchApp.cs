@@ -3,14 +3,18 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
-public class LaunchApp : MonoBehaviour
+namespace Assets.Scripts
 {
 
-    
-    public void gotogameplay()
+    public class LaunchApp : MonoBehaviour
     {
-        SceneManager.LoadScene("Gameplay");
+
+
+        public void gotogameplay()
+        {
+            SceneManager.LoadScene("Gameplay");
+
+        }
 
     }
-    
 }
