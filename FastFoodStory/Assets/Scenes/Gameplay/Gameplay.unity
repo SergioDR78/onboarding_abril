@@ -3915,7 +3915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfdf71f29c7bf4296d745c1b94b08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeInSeconds: 6
+  startTimeInSeconds: 60
   timerText: {fileID: 1098433507}
   pizzaPrefab: {fileID: 0}
   dialog: {fileID: 449614573}
