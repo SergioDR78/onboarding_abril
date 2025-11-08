@@ -1,5 +1,6 @@
 using Assets.Scripts;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,7 +19,8 @@ namespace Assets.Scripts
         public Dialog dialog;
         public Sprite pizzaType;
 
-
+        [Header("Ingredients")]
+        public List<ingredientpicker> IngredientsPicker;
 
         [Header("Customer")]
         public GameObject customer;
@@ -57,8 +59,9 @@ namespace Assets.Scripts
 
         void OrderPizza()
         {
-            //_pizza = PizzaFactory.CreateHamAndCheesePizza();
-            _pizza = PizzaFactory.CreateHamAndTomatoPizza();
+            _pizza = PizzaFactory.CreateHamAndCheesePizza();
+            //_pizza = PizzaFactory.CreateHamAndTomatoPizza();
+            IngredientsPicker.ForEach(x=>x.Pizza = _pizza);
             DisplayOrdererPizza(_pizza);
             // Lógica para ordenar pizza
         }

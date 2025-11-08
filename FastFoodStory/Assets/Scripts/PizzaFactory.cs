@@ -8,7 +8,7 @@ namespace Assets.Scripts
         public static SpritePizzas SpritePizzas;
         public static Pizza CreateHamAndCheesePizza()
         {
-            var ingredients = new Ingredient[] { new Ingredient("Ham"), new Ingredient("Cheese") };
+            var ingredients = new Ingredient[] { new Ingredient("jamon"), new Ingredient("queso") };
             return new Pizza(ingredients.ToList(), "jamon y queso");
         }
 

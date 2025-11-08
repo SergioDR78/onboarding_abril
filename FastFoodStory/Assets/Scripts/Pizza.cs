@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -20,6 +22,11 @@ namespace Assets.Scripts
         {
             this.ingredients = ingredients;
             this.name = name;
+        }
+
+        internal bool hasingredient(string ingredientName)
+        {
+            return ingredients.Any(x=>x.name == ingredientName);
         }
     }
 }
