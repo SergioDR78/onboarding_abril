@@ -16,5 +16,11 @@ namespace Assets.Scripts
 
         }
 
+        public void gotolobby()
+        {
+            SceneManager.LoadScene("Splash");
+
+        }
+
     }
 }

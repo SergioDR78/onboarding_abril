@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
+
 namespace Assets.Scripts
 {
-
-
-[System.Serializable]
-public struct IngredientData
-{
-    public string name;
-    public Sprite ingredient;
-}
+    [CreateAssetMenu(fileName = "IngredientData", menuName = "ScriptableObjects/IngredientData")]
+    public class IngredientData : ScriptableObject
+    {
+        public string Name;
+        public Sprite Image;
+        public bool IsSelected;
+    }
 }

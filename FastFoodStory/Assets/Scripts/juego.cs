@@ -1,45 +1,83 @@
 using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
 
     public class juego : MonoBehaviour
     {
-        public int startTimeInSeconds = 10;
         public TMP_Text timerText;
-
-        public GameObject pizzaPrefab;
+        public TMP_Text levelText;
+        public GameObject PizzaObject;
 
         [Header("Order")]
         public Dialog dialog;
         public Sprite pizzaType;
+        public GameObject OrderList;
+        public OrderDisplay OrderPrefab;
 
         [Header("Ingredients")]
         public List<ingredientpicker> IngredientsPicker;
 
         [Header("Customer")]
-        public GameObject customer;
-        public GameObject customerPosition;
+        public List<GameObject> customerPositions;
 
         [Header("Dialogs")]
         public DialogMultiple dialogMultiple;
 
+        [Header("Data")]
+        public LevelsData levels;
 
-        private Pizza _pizza;
+        public Button deliverButton;
+        public Button takeOrderButton;
+
+        public FeedbackDisplay feedbackDisplay;
+
+        Coroutine countdownCoroutine;
+
+        void Awake()
+        {
+            Reset();
+        }
+
+        private void Reset()
+        {
+            levels.ResetLevels();
+            timerText.text = "";
+            levelText.text = "";
+        }
 
         void Start()
         {
+            StartGame();
+        }
+
+        void StartGame()
+        {
+            ResetTimer(levels.CurrentLevel.durationInSeconds);
+            deliverButton.onClick.AddListener(DeliverPizza);
+            takeOrderButton.onClick.AddListener(TakeOrder);
             StartLevel();
         }
 
-        IEnumerator Countdown()
+        void ResetTimer(int durationInSeconds)
         {
-            int currentTime = startTimeInSeconds;
+            timerText.text = durationInSeconds.ToString();
+            if (countdownCoroutine != null)
+            {
+                StopCoroutine(countdownCoroutine);
+            }
+        }
+
+        IEnumerator Countdown(int durationInSeconds)
+        {
+            int currentTime = durationInSeconds;
 
             while (currentTime > 0)
             {
@@ -52,31 +90,72 @@ namespace Assets.Scripts
             LostLevel();
         }
 
-        void ShowCustomer()
+        void AdvanceLevel() 
         {
-            Instantiate(customer, customerPosition.transform);
+            levels.AdvanceToNextLevel();
+            if (levels.IsCompleted())
+            {
+                SceneManager.LoadScene("Win");
+                return;
+            }
+            ResetTimer(levels.CurrentLevel.durationInSeconds);
+            StartLevel();
         }
 
-        void OrderPizza()
+        void ShowCustomer(CustomerData customer)
         {
-            _pizza = PizzaFactory.CreateHamAndCheesePizza();
-            //_pizza = PizzaFactory.CreateHamAndTomatoPizza();
-            IngredientsPicker.ForEach(x=>x.Pizza = _pizza);
-            DisplayOrdererPizza(_pizza);
-            // Lógica para ordenar pizza
+            var customerPosition = customerPositions[UnityEngine.Random.Range(0, customerPositions.Count)];
+            var newCustomer = Instantiate(customer.Prefab, customerPosition.transform);
+            newCustomer.SetCustomer(customer);
+        }
+
+        void OrderPizza(PizzaData pizza)
+        {
+            var orderDisplay = Instantiate(OrderPrefab, OrderList.transform);
+            orderDisplay.SetOrder(pizza);
         }
 
 
-        void DisplayOrdererPizza(Pizza pizza)
+        void DisplayOrdererPizza(string pizzaName, Sprite pizzaType)
         {
-            dialog.title = "Quiero una pizza de " + pizza.name;
+            dialog.title = "Quiero una pizza de " + pizzaName;
             dialog.sprite = pizzaType;
             dialog.Show();
         }
 
         void DeliverPizza()
         {
-            // Lógica para entregar pizza
+            if (levels.CurrentLevel.CurrentOrder.GetCurrentPizza().IsCompleted())
+            {
+                feedbackDisplay.ShowSuccess();
+                ClearPizza();
+                deliverButton.enabled = false;
+                if (levels.CurrentLevel.CurrentOrder.MoveToNextPizza())
+                {
+                    // Hay más pizzas en el pedido actual
+                    takeOrderButton.enabled = true;
+                }
+                else
+                {
+                    if (levels.CurrentLevel.IsCompleted())
+                    {
+                        AdvanceLevel();
+                        return;
+                    }
+                    if (levels.CurrentLevel.AdvanceToNextOrder())
+                    {
+                        // Hay más pedidos en el nivel actual
+                    }
+                    else
+                    {
+                        // No hay más pedidos en el nivel actual
+                    }
+                }
+            }
+            else
+            {
+                feedbackDisplay.ShowFailure();
+            }
         }
 
         void LostLevel()
@@ -97,12 +176,73 @@ namespace Assets.Scripts
             dialogMultiple.Show();
         }
 
+        void ClearLevel()
+        {
+            ClearPizza();
+            foreach (Transform child in OrderList.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (var customerPosition in customerPositions)
+            {
+                foreach (Transform child in customerPosition.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            deliverButton.enabled = false;
+            takeOrderButton.enabled = true;
+        }
+
+        void ClearPizza()
+        {
+            foreach (Transform child in PizzaObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         void StartLevel()
         {
-            // Lógica para iniciar el nivel
-            StartCoroutine(Countdown()); // Inicia la cuenta regresiva
-            ShowCustomer(); // Muestra un comensal
-            OrderPizza(); // Ordena una pizza
+            ClearLevel();
+            levels.CurrentLevel.ResetLevel();
+            countdownCoroutine = StartCoroutine(Countdown(levels.CurrentLevel.durationInSeconds));
+            levelText.text = "Nivel " + (levels.CurrentLevelIndex + 1).ToString();
+            foreach (var order in levels.CurrentLevel.Orders)
+            {
+                CreateOrder(order);
+            }
+        }
+
+        void TakeOrder()
+        {
+            takeOrderButton.enabled = false;
+            var pizza = levels.CurrentLevel.CurrentOrder.GetCurrentPizza();
+            if (pizza == null) return;
+            deliverButton.enabled = true;
+            var newPizza = Instantiate(pizza.Prefab, PizzaObject.transform);
+            pizza.Prefab = newPizza;
+            IngredientsPicker.ForEach(x => x.Pizza = pizza);
+            DisplayOrdererPizza(pizza.PizzaName, pizza.PizzaImage);
+        }
+
+        void CreateOrder(OrderData order)
+        {
+            StartCoroutine(TimerCallback(order.durationInSecondsToAppear, () =>
+            {
+                ShowCustomer(order.Customer); // Muestra un comensal
+                foreach (var pizza in order.Pizzas)
+                {
+                    OrderPizza(pizza);
+                }                    
+            }));
+        }
+
+        IEnumerator TimerCallback(int durationInSeconds, Action action)
+        {
+
+            yield return new WaitForSeconds(durationInSeconds);
+            action.Invoke();
         }
     }
 }

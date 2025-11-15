@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e633f5ad94bdea343a8ee246ea745be1, type: 3}
+  m_Name: PizzaJQ
+  m_EditorClassIdentifier: 
+  PizzaName: jamon y queso
+  PizzaImage: {fileID: 7706914841027281809, guid: 495e0e5b8aac32c4dbd0a539eba9aeef, type: 3}
+  Prefab: {fileID: 6781504048587028208, guid: 747b4d1476afe9d4fa0c5e861afd1401, type: 3}
+  Ingredients:
+  - {fileID: 11400000, guid: 8dcf68f0f81035740b701e70d79ea044, type: 2}
+  - {fileID: 11400000, guid: 39c37cbb952ef6e448284fffab6eadcb, type: 2}
+  IngredientsUsed: []
