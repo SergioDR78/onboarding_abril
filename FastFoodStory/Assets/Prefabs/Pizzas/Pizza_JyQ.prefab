@@ -283,4 +283,3 @@ MonoBehaviour:
     IngredientObject: {fileID: 9030972961394342130}
   - Ingredient: {fileID: 11400000, guid: 39c37cbb952ef6e448284fffab6eadcb, type: 2}
     IngredientObject: {fileID: 6360240421745542762}
-  Data: {fileID: 0}

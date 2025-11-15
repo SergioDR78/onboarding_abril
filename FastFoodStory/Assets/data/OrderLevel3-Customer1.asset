@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9594b1b34f4dcba47b2b08e7797e09de, type: 3}
-  m_Name: OrderLevel2-Customer1-TwoPizzas
+  m_Name: OrderLevel3-Customer1
   m_EditorClassIdentifier: 
   FactoryPizza:
   - {fileID: 11400000, guid: e0b252bc915e42a48915b3ba95438c2a, type: 2}
   - {fileID: 11400000, guid: 9f831fbb04b810845b0aea54435a4fd6, type: 2}
+  - {fileID: 11400000, guid: b4dfa3ec0883e6243b0718c997fb0ad9, type: 2}
+  - {fileID: 11400000, guid: 0d5d2063247bf044f9973d041e583945, type: 2}
   FactoryCustomer:
   - {fileID: 11400000, guid: 5f80bf6adcb6dcc42be339e4eee6c003, type: 2}
-  - {fileID: 11400000, guid: 63ffdbe6b9823c94da831039cac61431, type: 2}
   durationInSecondsToAppear: 0
   OrderID: 
   Pizzas:

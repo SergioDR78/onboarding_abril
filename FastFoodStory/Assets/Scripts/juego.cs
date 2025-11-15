@@ -130,10 +130,10 @@ namespace Assets.Scripts
                 feedbackDisplay.ShowSuccess();
                 ClearPizza();
                 deliverButton.enabled = false;
+                takeOrderButton.enabled = true;
                 if (levels.CurrentLevel.CurrentOrder.MoveToNextPizza())
                 {
                     // Hay más pizzas en el pedido actual
-                    takeOrderButton.enabled = true;
                 }
                 else
                 {
