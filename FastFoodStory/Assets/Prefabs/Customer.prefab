@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8474244007196827364}
   - component: {fileID: 4277349681151005140}
   - component: {fileID: 189221008816735497}
+  - component: {fileID: 6848636744579357907}
   m_Layer: 5
   m_Name: Customer
   m_TagString: Untagged
@@ -89,3 +90,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4277349681151005140}
+--- !u!95 &6848636744579357907
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238964984929007713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 33181944fc3384a47a96e5ab8b778ffc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
