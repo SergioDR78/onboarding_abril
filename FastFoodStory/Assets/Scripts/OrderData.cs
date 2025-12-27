@@ -18,6 +18,13 @@ namespace Assets.Scripts
         public DateTime OrderDate;
         public int Quantity;
         public int currentPizzaIndex = 0;
+
+        private CustomerDisplay customerInstance;
+        public CustomerDisplay CustomerInstance
+        {
+            get { return customerInstance; }
+        }
+
         public PizzaData GetCurrentPizza()
         {
             if (currentPizzaIndex < Pizzas.Count)
@@ -54,6 +61,11 @@ namespace Assets.Scripts
             if (FactoryCustomer.Count == 0) return;
             int randomIndex = UnityEngine.Random.Range(0, FactoryCustomer.Count);
             Customer = FactoryCustomer[randomIndex];
+        }
+
+        public void SetCustomerInstance(CustomerDisplay instance)
+        {
+            customerInstance = instance;
         }
 
         void SetPizzasRandom() 

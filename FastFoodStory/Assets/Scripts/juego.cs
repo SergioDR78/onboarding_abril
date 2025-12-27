@@ -60,6 +60,7 @@ namespace Assets.Scripts
 
         void StartGame()
         {
+            CustomerPositionManager.Instance.Initialize(customerPositions);
             ResetTimer(levels.CurrentLevel.durationInSeconds);
             deliverButton.onClick.AddListener(DeliverPizza);
             takeOrderButton.onClick.AddListener(TakeOrder);
@@ -102,11 +103,18 @@ namespace Assets.Scripts
             StartLevel();
         }
 
-        void ShowCustomer(CustomerData customer)
+        CustomerDisplay ShowCustomer(CustomerData customer)
         {
-            var customerPosition = customerPositions[UnityEngine.Random.Range(0, customerPositions.Count)];
+            var customerPosition = CustomerPositionManager.Instance.GetAvailablePosition();
+            if (customerPosition == null)
+            {
+                Debug.LogWarning("No hay posiciones disponibles para mostrar al cliente");
+                return null;
+            }
+            
             var newCustomer = Instantiate(customer.Prefab, customerPosition.transform);
             newCustomer.SetCustomer(customer);
+            return newCustomer;
         }
 
         void OrderPizza(PizzaData pizza)
@@ -137,9 +145,12 @@ namespace Assets.Scripts
                 }
                 else
                 {
+                    // El pedido actual está completo, remover al cliente
+                    RemoveCustomerFromCurrentOrder();
+
                     if (levels.CurrentLevel.IsCompleted())
                     {
-                        AdvanceLevel();
+                        StartCoroutine(AdvanceLevelAfterDelay(1.5f));
                         return;
                     }
                     if (levels.CurrentLevel.AdvanceToNextOrder())
@@ -156,6 +167,41 @@ namespace Assets.Scripts
             {
                 feedbackDisplay.ShowFailure();
             }
+        }
+
+        IEnumerator AdvanceLevelAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            AdvanceLevel();
+        }
+
+        void RemoveCustomerFromCurrentOrder()
+        {
+            var currentOrder = levels.CurrentLevel.CurrentOrder;
+            if (currentOrder.CustomerInstance != null)
+            {
+                var customerTransform = currentOrder.CustomerInstance.transform;
+                if (customerTransform.parent != null)
+                {
+                    CustomerPositionManager.Instance.ReleasePosition(customerTransform.parent.gameObject);
+                }
+
+                // Activar animación de salida
+                var animator = currentOrder.CustomerInstance.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.SetBool("out", true);
+                }
+
+                // Destruir después de 1 segundo
+                StartCoroutine(DestroyCustomerAfterDelay(currentOrder.CustomerInstance.gameObject, 1f));
+            }
+        }
+
+        IEnumerator DestroyCustomerAfterDelay(GameObject customer, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            DestroyImmediate(customer);
         }
 
         void LostLevel()
@@ -192,6 +238,7 @@ namespace Assets.Scripts
             }
             deliverButton.enabled = false;
             takeOrderButton.enabled = true;
+            CustomerPositionManager.Instance.ReleaseAllPositions();
         }
 
         void ClearPizza()
@@ -230,12 +277,19 @@ namespace Assets.Scripts
         {
             StartCoroutine(TimerCallback(order.durationInSecondsToAppear, () =>
             {
-                ShowCustomer(order.Customer); // Muestra un comensal
-                foreach (var pizza in order.Pizzas)
-                {
-                    OrderPizza(pizza);
-                }                    
+                var instance = ShowCustomer(order.Customer); // Muestra un comensal
+                order.SetCustomerInstance(instance);
+                StartCoroutine(ShowPizzasAfterDelay(order, 1f));
             }));
+        }
+
+        IEnumerator ShowPizzasAfterDelay(OrderData order, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            foreach (var pizza in order.Pizzas)
+            {
+                OrderPizza(pizza);
+            }
         }
 
         IEnumerator TimerCallback(int durationInSeconds, Action action)

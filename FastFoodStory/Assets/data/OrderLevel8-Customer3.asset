@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: OrderLevel8-Customer3
   m_EditorClassIdentifier: 
   FactoryPizza:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0d5d2063247bf044f9973d041e583945, type: 2}
+  - {fileID: 11400000, guid: 9f831fbb04b810845b0aea54435a4fd6, type: 2}
+  - {fileID: 11400000, guid: b4dfa3ec0883e6243b0718c997fb0ad9, type: 2}
   FactoryCustomer: []
   durationInSecondsToAppear: 0
   OrderID: 
