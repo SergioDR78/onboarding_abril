@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58405ac7e639d3c409e8722175e7af6f, type: 3}
+  m_Name: Level8
+  m_EditorClassIdentifier: 
+  levelName: 8
+  durationInSeconds: 40
+  Orders:
+  - {fileID: 11400000, guid: 5c2d52588e5aa4744b8794b19fc05ff1, type: 2}
+  - {fileID: 11400000, guid: 7010ed9e5b025514386ee7dae81adc99, type: 2}
+  - {fileID: 11400000, guid: 5fb920d169e0d004cb9262609555b6bc, type: 2}
+  CurrentOrderIndex: 0
