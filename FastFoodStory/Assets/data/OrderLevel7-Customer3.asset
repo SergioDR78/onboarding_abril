@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FactoryPizza:
   - {fileID: 11400000, guid: 9ec063753da4ddd4b87834a9a04d156e, type: 2}
-  FactoryCustomer: []
+  FactoryCustomer:
+  - {fileID: 11400000, guid: c0f958b5c155b1741bb57e098369c019, type: 2}
   durationInSecondsToAppear: 0
   OrderID: 
   Pizzas: []

@@ -21,9 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5f80bf6adcb6dcc42be339e4eee6c003, type: 2}
   durationInSecondsToAppear: 0
   OrderID: 
-  Pizzas:
-  - {fileID: 0}
-  - {fileID: 0}
+  Pizzas: []
   Customer: {fileID: 11400000, guid: 5f80bf6adcb6dcc42be339e4eee6c003, type: 2}
   TotalPrice: 0
   Quantity: 2

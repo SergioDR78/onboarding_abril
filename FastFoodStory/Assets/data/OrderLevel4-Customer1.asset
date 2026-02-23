@@ -17,7 +17,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d5545afe538f08342a482b49bfda5e2d, type: 2}
   - {fileID: 11400000, guid: 9ec063753da4ddd4b87834a9a04d156e, type: 2}
   - {fileID: 11400000, guid: b4dfa3ec0883e6243b0718c997fb0ad9, type: 2}
-  FactoryCustomer: []
+  FactoryCustomer:
+  - {fileID: 11400000, guid: 5f80bf6adcb6dcc42be339e4eee6c003, type: 2}
+  - {fileID: 11400000, guid: c0f958b5c155b1741bb57e098369c019, type: 2}
   durationInSecondsToAppear: 15
   OrderID: 
   Pizzas: []
