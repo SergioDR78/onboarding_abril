@@ -1787,7 +1787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730018846}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CustomerPosition3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1822,7 +1822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788658578}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CustomerPosition5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2202,7 +2202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858650326}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CustomerPosition4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2692,7 +2692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1000555569}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CustomerPosition6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3260,7 +3260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1138801758}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CustomerPosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3431,7 +3431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241206866}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CustomerPosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4100,10 +4100,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1241206866}
-  - {fileID: 858650326}
   - {fileID: 1138801758}
   - {fileID: 788658578}
+  - {fileID: 1241206866}
+  - {fileID: 858650326}
   - {fileID: 730018846}
   - {fileID: 1000555569}
   m_Father: {fileID: 39820899}
@@ -6656,7 +6656,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -8.5, y: 0.00009650624}
+  m_AnchoredPosition: {x: -8.5, y: -0.000008437019}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2126126901
