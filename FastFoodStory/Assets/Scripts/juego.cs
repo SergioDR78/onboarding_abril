@@ -137,8 +137,8 @@ namespace Assets.Scripts
             {
                 feedbackDisplay.ShowSuccess();
                 ClearPizza();
-                deliverButton.enabled = false;
-                takeOrderButton.enabled = true;
+                deliverButton.interactable = false;
+                takeOrderButton.interactable = true;
                 if (levels.CurrentLevel.CurrentOrder.MoveToNextPizza())
                 {
                     // Hay más pizzas en el pedido actual
@@ -236,8 +236,8 @@ namespace Assets.Scripts
                     Destroy(child.gameObject);
                 }
             }
-            deliverButton.enabled = false;
-            takeOrderButton.enabled = true;
+            deliverButton.interactable = false;
+            takeOrderButton.interactable = true;
             CustomerPositionManager.Instance.ReleaseAllPositions();
         }
 
@@ -263,10 +263,10 @@ namespace Assets.Scripts
 
         void TakeOrder()
         {
-            takeOrderButton.enabled = false;
+            takeOrderButton.interactable = false;
             var pizza = levels.CurrentLevel.CurrentOrder.GetCurrentPizza();
             if (pizza == null) return;
-            deliverButton.enabled = true;
+            deliverButton.interactable = true;
             var newPizza = Instantiate(pizza.Prefab, PizzaObject.transform);
             pizza.Prefab = newPizza;
             IngredientsPicker.ForEach(x => x.Pizza = pizza);
